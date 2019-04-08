@@ -40,3 +40,14 @@ class Meal(models.Model):
         return self.name_of_meal
 
 
+class Status(models.Model):
+    title = models.CharField(max_length=80)
+
+    def __str__(self):
+        return self.title
+
+
+class ServicePercentage(models.Model):
+    service = models.PositiveSmallIntegerField()
+
+
