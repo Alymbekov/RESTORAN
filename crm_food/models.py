@@ -24,7 +24,7 @@ class Department(models.Model):
 
 class MealCategory(models.Model):
     title = models.CharField(max_length=100)
-    department = models.ForeignKey('Department', on_delete=models.SET_NULL, null=True)
+    department = models.ForeignKey('Department', related_name='mealcategories', on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return self.title
@@ -32,7 +32,7 @@ class MealCategory(models.Model):
 
 class Meal(models.Model):
     name_of_meal = models.CharField(max_length=100)
-    category = models.ForeignKey('MealCategory', on_delete=models.SET_NULL, null=True)
+    category = models.ForeignKey('MealCategory',related_name='meals', on_delete=models.SET_NULL, null=True)
     price = models.PositiveSmallIntegerField()
     description = models.TextField()
 
@@ -50,4 +50,27 @@ class Status(models.Model):
 class ServicePercentage(models.Model):
     service = models.PositiveSmallIntegerField()
 
+    def __str__(self):
+        return '%s' % self.service
+
+
+class Order(models.Model):
+    table = models.OneToOneField('Table', on_delete=models.SET_NULL, null=True)
+    isitopen = models.PositiveSmallIntegerField()
+    meal = models.ManyToManyField('Meal', related_name='orders')
+    status = models.OneToOneField('Status', on_delete=models.SET_NULL, null=True)
+    date = models.DateTimeField(auto_now_add=True, null=True)
+
+    def __str__(self):
+        return '{} + {} + {} + {}'.format(self.table, self.isitopen, self.meal, self.status)
+
+
+class Check(models.Model):
+    order = models.ForeignKey('Order', on_delete=models.SET_NULL, null=True)
+    date = models.DateTimeField(auto_now_add=True, null=True)
+    service = models.ForeignKey('ServicePercentage', on_delete=models.CASCADE, null=True)
+    total_sum = models.PositiveSmallIntegerField()
+
+    def __str__(self):
+        return '%s' % self.order
 
