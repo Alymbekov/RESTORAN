@@ -55,7 +55,7 @@ class ServicePercentage(models.Model):
 
 
 class Order(models.Model):
-    table = models.OneToOneField('Table', on_delete=models.SET_NULL, null=True)
+    table = models.ForeignKey('Table', on_delete=models.SET_NULL, null=True)
     isitopen = models.PositiveSmallIntegerField()
     meal = models.ManyToManyField('Meal', related_name='orders')
     status = models.OneToOneField('Status', on_delete=models.SET_NULL, null=True)
@@ -66,7 +66,7 @@ class Order(models.Model):
 
 
 class Check(models.Model):
-    order = models.ForeignKey('Order', on_delete=models.SET_NULL, null=True)
+    order = models.ForeignKey('Order', on_delete=models.CASCADE, null=True)
     date = models.DateTimeField(auto_now_add=True, null=True)
     service = models.ForeignKey('ServicePercentage', on_delete=models.CASCADE, null=True)
     total_sum = models.PositiveSmallIntegerField()
