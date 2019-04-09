@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 class Table(models.Model):
@@ -59,7 +60,7 @@ class Order(models.Model):
     isitopen = models.PositiveSmallIntegerField()
     meal = models.ManyToManyField('Meal', related_name='orders')
     status = models.OneToOneField('Status', on_delete=models.SET_NULL, null=True)
-    date = models.DateTimeField(auto_now_add=True, null=True)
+    date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return '{} + {} + {} + {}'.format(self.table, self.isitopen, self.meal, self.status)
@@ -67,7 +68,7 @@ class Order(models.Model):
 
 class Check(models.Model):
     order = models.ForeignKey('Order', on_delete=models.CASCADE, null=True)
-    date = models.DateTimeField(auto_now_add=True, null=True)
+    date = models.DateTimeField(default=timezone.now)
     service = models.ForeignKey('ServicePercentage', on_delete=models.CASCADE, null=True)
     total_sum = models.PositiveSmallIntegerField()
 
