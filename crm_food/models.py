@@ -59,7 +59,7 @@ class Order(models.Model):
     table = models.ForeignKey('Table', on_delete=models.SET_NULL, null=True)
     isitopen = models.PositiveSmallIntegerField()
     meal = models.ManyToManyField('Meal', related_name='orders')
-    status = models.OneToOneField('Status', on_delete=models.SET_NULL, null=True)
+    status = models.ForeignKey('Status', on_delete=models.SET_NULL, null=True)
     date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
@@ -74,4 +74,3 @@ class Check(models.Model):
 
     def __str__(self):
         return '%s' % self.order
-
