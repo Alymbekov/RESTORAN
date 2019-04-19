@@ -61,10 +61,16 @@ class Order(models.Model):
     meal = models.ManyToManyField('Meal', related_name='orders')
     status = models.ForeignKey('Status', on_delete=models.SET_NULL, null=True)
     date = models.DateTimeField(default=timezone.now)
-
     def __str__(self):
         return '{} + {} + {} + {}'.format(self.table, self.isitopen, self.meal, self.status)
-
+    totall_sum = []
+    count = 5
+    def total_sum(self, count):
+        if self.count == self.count:
+            for x in range(1,self.count+1):
+                self.totall_sum.append(self.meal.price)
+        return sum(totall_summ)
+    print(totall_sum)
 
 class Check(models.Model):
     order = models.ForeignKey('Order', on_delete=models.CASCADE, null=True)
