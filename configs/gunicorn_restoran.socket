@@ -1,0 +1,8 @@
+[Unit]
+Description=gunicorn socket for restoran project
+
+[Socket]
+ListenStream=/run/gunicorn/restoran_socket
+
+[Install]
+WantedBy=sockets.target
