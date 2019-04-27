@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-
+from django.db import models
 
 class Table(models.Model):
     name_of_tables = models.CharField(max_length=100)
