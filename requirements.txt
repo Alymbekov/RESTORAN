@@ -6,3 +6,4 @@ python-decouple
 djangorestframework
 pygments
 gunicorn
+requests

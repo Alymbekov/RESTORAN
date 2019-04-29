@@ -14,6 +14,7 @@ from crm_food.views import index
 urlpatterns = [
     path('tables/',TableViewList.as_view(),name="tables"),
     path('tables/<int:pk>/',GetTableViewId.as_view()),
+    path('tables/1/', GetTableViewId.as_view()),
     path('roles/',RoleViewList.as_view()),
     path('roles/<int:pk>/',GetRoleViewId.as_view()),
     path('departments/', DepartmentViewList.as_view()),
