@@ -1,5 +1,9 @@
 from django.db import models
 from django.utils import timezone
+from django.db import models
+from django.contrib.auth.models import AbstractUser
+from django.utils.translation import ugettext_lazy as _
+from django.conf import settings
 
 
 class Table(models.Model):
@@ -61,16 +65,18 @@ class Order(models.Model):
     meal = models.ManyToManyField('Meal', related_name='orders')
     status = models.ForeignKey('Status', on_delete=models.SET_NULL, null=True)
     date = models.DateTimeField(default=timezone.now)
+
+        
     def __str__(self):
         return '{} + {} + {} + {}'.format(self.table, self.isitopen, self.meal, self.status)
-    totall_sum = []
-    count = 5
-    def total_sum(self, count):
-        if self.count == self.count:
-            for x in range(1,self.count+1):
-                self.totall_sum.append(self.meal.price)
-        return sum(totall_summ)
-    print(totall_sum)
+    # totall_sum = []
+    # count = 5
+    # def total_sum(self, count):
+    #     if self.count == self.count:
+    #         for x in range(1,self.count+1):
+    #             self.totall_sum.append(self.meal.price)
+    #     return sum(totall_summ)
+    # print(totall_sum)
 
 class Check(models.Model):
     order = models.ForeignKey('Order', on_delete=models.CASCADE, null=True)
@@ -80,3 +86,14 @@ class Check(models.Model):
 
     def __str__(self):
         return '%s' % self.order
+
+
+# class User(AbstractUser):
+#     username = models.CharField(max_length=255,blank=True, null=True)
+#     email = models.EmailField(_('email address'), unique=True)
+#     role = models.OneToOneField('Role', on_delete=models.CASCADE, null=True)
+#     USERNAME_FIELD = 'email'
+#     REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
+#
+#     def __str__(self):
+#         return "{}".format(self.email)

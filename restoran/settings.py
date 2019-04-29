@@ -32,13 +32,13 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.nurs.ml', '159.89.29.44']
 # Application definition
 
 INSTALLED_APPS = [
-    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'crm_food',
 ]
 
@@ -85,6 +85,7 @@ DATABASES = {
         'POST': config('DB_PORT'),
     }
 }
+# AUTH_USER_MODEL = 'crm_food.User'
 
 
 # Password validation
