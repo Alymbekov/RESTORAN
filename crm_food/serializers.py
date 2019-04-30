@@ -13,6 +13,9 @@ class TableSerializer(serializers.ModelSerializer):
             'id',
             'name_of_tables',
         )
+        extra_kwargs = {
+            'id': {'read_only': True}
+        }
 
 
 class RoleSerializer(serializers.ModelSerializer):
