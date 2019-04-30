@@ -179,3 +179,44 @@ class TestCreateServicePercentage(APITestCase):
         def test_deleting_services(self):
             response = self.client.delete(reverse('services_detail', kwargs={'pk': self.service.id}))
             self.assertEqual(204, response.status_code)
+
+
+
+
+
+class TestCreateMealCategory(APITestCase):
+
+
+    def setUp(self):
+        self.department = Department.objects.create(
+            name_of_departments="Кухня"
+        )
+        self.category=MealCategory.objects.create(
+                            title = 'Первые блюда',
+                            department = self.department,
+                        )
+
+    def test_create_category(self):
+        category_testing = MealCategory.objects.get(title='Первые блюда')
+        print(category_testing)
+        self.assertEquals(category_testing.title,'Первые блюда')
+
+
+    def test_getting_categories(self):
+        response  = self.client.get(reverse('categories'), format="json")
+        self.assertEqual(len(response.data), 1)
+
+
+    def test_updating_category(self):
+        response = self.client.put(reverse('categories_detail', kwargs={'pk': self.category.id}),{
+            'title': 'Первые блюда обновлено',
+            'department': self.department.id
+        }, format="json")
+        print(response.data)
+        response = response.json()
+        self.assertEqual('Первые блюда обновлено', response['title'])
+
+
+    def test_deleting_category(self):
+        response = self.client.delete(reverse('categories_detail', kwargs={'pk': self.category.id}))
+        self.assertEqual(204, response.status_code)
