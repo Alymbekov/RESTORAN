@@ -61,46 +61,46 @@ class GetServicePersentageViewId(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ServicePercentageSerializer
 
 
-class StatusViewList(generics.ListCreateAPIView):
+class StatusCreateView(generics.ListCreateAPIView):
     queryset = Status.objects.all()
     serializer_class = StatusSerializer
 
 
-class GetStatusViewId(generics.RetrieveUpdateDestroyAPIView):
+class StatusDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Status.objects.all()
     serializer_class = StatusSerializer
 
 
-class DepartmentViewList(generics.ListCreateAPIView):
+class DepartmentCreateView(generics.ListCreateAPIView):
     queryset = Department.objects.all()
     serializer_class = DepartmentSerializer
 
 
-class GetDepartmentViewId(generics.RetrieveUpdateDestroyAPIView):
+class DepartmentDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Department.objects.all()
     serializer_class = DepartmentSerializer
 
 
-class RoleViewList(generics.ListCreateAPIView):
+class RoleCreateView(generics.ListCreateAPIView):
     queryset = Role.objects.all()
     serializer_class = RoleSerializer
 
 
-class GetRoleViewId(generics.RetrieveUpdateDestroyAPIView):
+class RoleDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Role.objects.all()
     serializer_class = RoleSerializer
 
 
-class TableViewList(generics.ListCreateAPIView):
+class TableCreateView(generics.ListCreateAPIView):
     queryset = Table.objects.all()
     serializer_class = TableSerializer
 
 
-class GetTableViewId(generics.RetrieveUpdateDestroyAPIView):
+class TableDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Table.objects.all()
     serializer_class = TableSerializer
 
 
-def index(request):
-    return HttpResponse("Hello world")
+# def index(request):
+#     return HttpResponse("Hello world")
 # Create your views here.
