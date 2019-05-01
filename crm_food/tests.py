@@ -189,7 +189,7 @@ class TestCreateMealCategory(APITestCase):
 
     def setUp(self):
         self.department = Department.objects.create(
-            name_of_departments="Кухня"
+            name_of_departments='Кухня'
         )
         self.category=MealCategory.objects.create(
                             title = 'Первые блюда',
@@ -220,3 +220,52 @@ class TestCreateMealCategory(APITestCase):
     def test_deleting_category(self):
         response = self.client.delete(reverse('categories_detail', kwargs={'pk': self.category.id}))
         self.assertEqual(204, response.status_code)
+
+
+class TestCreatingMeal(APITestCase):
+
+
+    def setUp(self):
+        self.department = Department.objects.create(
+            name_of_departments = 'Кухня'
+        )
+        self.category = MealCategory.objects.create(
+            title = 'Вторые блюда',
+            department = self.department
+        )
+
+        self.meal = Meal.objects.create(
+            name_of_meal='Лагман',
+            category = self.category,
+            price = 250,
+            description = "tasty tasty"
+        )
+
+
+    def test_create_meal(self):
+        meal = Meal.objects.get(
+            name_of_meal='Лагман'
+        )
+        self.assertEquals(meal.name_of_meal, 'Лагман')
+
+
+    def test_getting_meals(self):
+        response = self.client.get(reverse('meals'), format="json")
+        self.assertEquals(len(response.data), 1)
+
+
+    def test_updating_meal(self):
+        response = self.client.put(reverse('meals_detail', kwargs={'pk': self.meal.id}),{
+            'name_of_meal': 'Лагман обновлено',
+            'category': self.category.id,
+            'price': 300,
+            'description': 'Обновлено',
+        }, format="json")
+
+        response = response.json()
+        self.assertEquals('Лагман обновлено', response['name_of_meal'])
+
+
+    def test_deleting_meal(self):
+        response = self.client.delete(reverse('meals_detail', kwargs={'pk': self.meal.id}))
+        self.assertEquals(204, response.status_code)
