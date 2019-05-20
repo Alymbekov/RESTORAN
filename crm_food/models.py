@@ -65,10 +65,15 @@ class Order(models.Model):
     meal = models.ManyToManyField('Meal', related_name='orders')
     status = models.ForeignKey('Status', on_delete=models.SET_NULL, null=True)
     date = models.DateTimeField(default=timezone.now)
+    count = models.ManyToManyField('Meal', through='CountMeals', related_name='orders_count')
+    total_sum = models.CharField(max_length=255, null=True)
 
-        
     def __str__(self):
-        return '{} + {} + {} + {}'.format(self.table, self.isitopen, self.meal, self.status)
+        return '{} + {} + {} + {}+{}'.format(self.table, self.isitopen, self.meal, self.status, self.count)
+
+    def total_sum(self):
+        self.total_sum = "12"+ str(self.count)
+        return self.total_sum
     # totall_sum = []
     # count = 5
     # def total_sum(self, count):
@@ -77,6 +82,15 @@ class Order(models.Model):
     #             self.totall_sum.append(self.meal.price)
     #     return sum(totall_summ)
     # print(totall_sum)
+
+class CountMeals(models.Model):
+    meal = models.ForeignKey(Meal, on_delete=models.CASCADE, related_name='countmeal')
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='countmeal')
+    count = models.PositiveSmallIntegerField()
+
+    def __str__(self):
+        return '{},{},{}'.format(self.meal, self.order, self.count)
+
 
 class Check(models.Model):
     order = models.ForeignKey('Order', on_delete=models.CASCADE, null=True)

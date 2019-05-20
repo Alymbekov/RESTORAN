@@ -40,6 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'crm_food',
+    'users',
+    'rest_framework.authtoken',
+    'rest_auth',
+
 ]
 
 MIDDLEWARE = [
@@ -120,8 +124,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
-
 STATIC_URL = '/static/'
+
+AUTH_USER_MODEL = 'users.User'
+from restoran.restconf.main import *

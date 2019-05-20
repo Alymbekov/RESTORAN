@@ -1,9 +1,15 @@
-Django >= 2
 pillow
 psycopg2
 psycopg2-binary
 python-decouple
-djangorestframework
-pygments
-gunicorn
-requests
+Django==2.2.1
+django-filter==2.1.0
+django-rest-auth==0.9.5
+djangorestframework==3.9.4
+djangorestframework-jwt==1.11.0
+Markdown==3.1
+PyJWT==1.7.1
+pytz==2019.1
+six==1.12.0
+sqlparse==0.3.0
+

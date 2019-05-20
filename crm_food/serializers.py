@@ -139,6 +139,8 @@ class OrderSerializer(serializers.ModelSerializer):
             'meals_name',
             'status',
             'status_name',
+            'count',
+            'total_sum',
         )
 
     #
